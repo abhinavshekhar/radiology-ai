@@ -21,6 +21,7 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+cloudflared.log
 
 # Model weights (large files)
 weights/*.pt
