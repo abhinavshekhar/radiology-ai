@@ -58,6 +58,10 @@ docker compose up --build
 - Backend API: http://localhost:8000
 - Orthanc PACS (optional): `docker compose --profile pacs up`
 
+### Cloud Deploy
+
+See [docs/DEPLOY.md](docs/DEPLOY.md) for Render + Vercel (public URL) or VPS instructions.
+
 ## Project Structure
 
 ```

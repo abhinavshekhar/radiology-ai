@@ -1,0 +1,37 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Connect this repo in Render Dashboard → New → Blueprint
+services:
+  - type: web
+    name: radiology-ai-api
+    runtime: docker
+    dockerfilePath: docker/Dockerfile.backend
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: '["*"]'
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: radiology-ai-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: radiology-ai-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: radiology-ai-redis
+          property: connectionString
+      - key: ENCRYPT_UPLOADS
+        value: "true"
+
+  - type: redis
+    name: radiology-ai-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru

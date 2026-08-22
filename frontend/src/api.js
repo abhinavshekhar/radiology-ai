@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: '/api/v1' })
+const API_BASE = import.meta.env.VITE_API_URL || '/api/v1'
+
+const api = axios.create({ baseURL: API_BASE })
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
@@ -38,7 +40,7 @@ export const studies = {
   gradcam: (studyId) => api.post(`/gradcam/${studyId}`),
   report: (studyId) => api.post(`/report/${studyId}`),
   get: (studyId) => api.get(`/studies/${studyId}`),
-  image: (studyId) => `/api/v1/studies/${studyId}/image`,
+  image: (studyId) => `${API_BASE}/studies/${studyId}/image`,
 }
 
 export const dashboard = {
