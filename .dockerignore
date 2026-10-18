@@ -8,5 +8,3 @@ backend/.venv
 data
 *.db
 .env
-.env
-.env
